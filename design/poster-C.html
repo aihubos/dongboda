@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>동보다 포스터 C</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1080px; height: 3240px; margin: 0; overflow: hidden; background: #fff; }
+  body { font-family: 'Pretendard', sans-serif; color: #10224F; word-break: keep-all; -webkit-font-smoothing: antialiased; }
+  .poster { width: 1080px; height: 3240px; position: relative; overflow: hidden; background: #fff; display: flex; flex-direction: column; }
+
+  /* ---------- 상단 흰 영역 ---------- */
+  .top { padding: 52px 80px 0; }
+  .logo { height: 92px; display: block; }
+  .rule { height: 3px; background: #D9DDE5; margin: 30px 0 32px; border-radius: 2px; }
+  .pill { display: inline-block; background: #EAF0FF; color: #1E5EFF; font-weight: 700; font-size: 34px; padding: 16px 36px; border-radius: 999px; box-shadow: 0 3px 0 #D3DCF2; letter-spacing: -0.02em; }
+
+  .hero { position: relative; margin-top: 26px; }
+  .hero h1 { font-weight: 800; font-size: 120px; line-height: 1.1; letter-spacing: -0.035em; }
+  .hero h1 .b { color: #1E5EFF; display: block; }
+  .hero h1 .n { color: #10224F; display: block; }
+  .checkcard { position: absolute; right: 0; top: 14px; width: 176px; height: 176px; border-radius: 34px; background: #EAF0FF; box-shadow: 0 6px 0 #D3DCF2, 0 10px 24px rgba(30,94,255,.10); display: flex; align-items: center; justify-content: center; }
+
+  .bar { width: 96px; height: 12px; border-radius: 6px; background: #1E5EFF; margin: 30px 0 24px; }
+  .empathy { font-size: 34px; line-height: 1.55; color: #4A5672; letter-spacing: -0.02em; }
+  .empathy b { color: #10224F; font-weight: 700; }
+
+  .tags { display: flex; gap: 18px; margin-top: 22px; }
+  .tag { flex: 1; height: 78px; border-radius: 20px; border: 2px solid #E3E7EF; background: #F7F9FC; display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 30px; font-weight: 600; color: #8A93A8; letter-spacing: -0.02em; }
+  .tag s { text-decoration-thickness: 3px; text-decoration-color: #B4BBCB; }
+  .tag.on { background: #EAF0FF; border-color: #1E5EFF; color: #1E5EFF; font-weight: 700; }
+
+  .question { margin-top: 28px; font-size: 42px; font-weight: 800; line-height: 1.38; letter-spacing: -0.03em; color: #10224F; }
+  .question em { font-style: normal; color: #1E5EFF; }
+
+  /* ---------- 블루 블록 1 : 숫자 ---------- */
+  .blue1 { margin-top: 40px; background: #1E5EFF; color: #fff; padding: 36px 80px 32px; }
+  .blue1 .lead { font-size: 38px; font-weight: 700; letter-spacing: -0.025em; line-height: 1.4; }
+  .blue1 .lead span { color: #D8FF6A; }
+  .big { font-weight: 900; color: #D8FF6A; font-size: 196px; line-height: 1; letter-spacing: -0.045em; margin: 10px 0 4px; white-space: nowrap; }
+  .big small { font-size: 130px; letter-spacing: -0.03em; }
+  .formula { display: flex; align-items: center; gap: 14px; margin-top: 20px; }
+  .fx { flex: none; background: rgba(255,255,255,.14); border: 2px solid rgba(255,255,255,.35); border-radius: 20px; padding: 16px 22px; text-align: center; }
+  .fx .k { font-size: 26px; font-weight: 600; opacity: .85; display: block; letter-spacing: -0.01em; }
+  .fx .v { font-size: 38px; font-weight: 800; letter-spacing: -0.03em; }
+  .fx.last { background: #D8FF6A; border-color: #D8FF6A; color: #10224F; }
+  .arrow { flex: none; font-size: 40px; font-weight: 800; color: #D8FF6A; }
+  .formula-note { font-size: 30px; margin-top: 16px; opacity: .92; letter-spacing: -0.02em; line-height: 1.45; }
+  .blue1 .rule2 { height: 2px; background: rgba(255,255,255,.3); margin: 22px 0 20px; }
+  .balance { font-size: 31px; line-height: 1.55; letter-spacing: -0.02em; }
+  .balance b { font-weight: 800; }
+
+  /* ---------- 흰 영역 2 : 체크리스트·상담자 ---------- */
+  .mid { padding: 32px 80px 26px; }
+  .guide { font-size: 42px; font-weight: 800; line-height: 1.36; letter-spacing: -0.03em; color: #10224F; }
+  .guide em { font-style: normal; color: #1E5EFF; }
+  .checks { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+  .ck { display: flex; align-items: center; gap: 18px; background: #fff; border: 2px solid #E3E7EF; border-radius: 24px; padding: 18px 20px; }
+  .ck .ic { flex: none; width: 64px; height: 64px; border-radius: 18px; background: #EAF0FF; display: flex; align-items: center; justify-content: center; }
+  .ck p { font-size: 30px; font-weight: 700; line-height: 1.32; letter-spacing: -0.025em; color: #10224F; }
+
+  .advisor { display: flex; gap: 26px; align-items: flex-start; margin-top: 26px; padding-top: 26px; border-top: 2px solid #E6E9EF; }
+  .avatar { flex: none; width: 120px; height: 120px; border-radius: 50%; background: #1E5EFF; color: #fff; font-size: 56px; font-weight: 800; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 8px #EAF0FF; }
+  .adv-body { flex: 1; }
+  .adv-intro { font-size: 31px; line-height: 1.5; letter-spacing: -0.02em; color: #4A5672; }
+  .adv-intro b { color: #10224F; font-weight: 800; }
+  .bubble { position: relative; margin-top: 14px; background: #EAF0FF; border-radius: 6px 28px 28px 28px; padding: 22px 28px; font-size: 30px; line-height: 1.5; letter-spacing: -0.02em; color: #10224F; }
+  .bubble b { color: #1E5EFF; font-weight: 800; }
+
+  /* ---------- 블루 블록 2 : QR ---------- */
+  .blue2 { margin-top: auto; background: #1E5EFF; color: #fff; padding: 44px 80px 34px; }
+  .qr-row { display: flex; align-items: center; gap: 48px; }
+  .qr-card { flex: none; background: #fff; border-radius: 32px; padding: 20px; box-shadow: 0 10px 30px rgba(8,30,100,.25); }
+  .qr-card img { width: 300px; height: 300px; display: block; }
+  .qr-text .s { font-size: 30px; font-weight: 600; opacity: .9; letter-spacing: -0.02em; }
+  .qr-text .t { font-size: 54px; font-weight: 800; line-height: 1.24; letter-spacing: -0.035em; margin-top: 12px; }
+  .qr-text .t span { color: #D8FF6A; }
+  .qr-text .brand { margin-top: 30px; font-size: 30px; font-weight: 800; letter-spacing: 0.01em; }
+  .qr-text .brand small { display: block; font-size: 22px; font-weight: 500; opacity: .8; letter-spacing: 0.08em; margin-top: 4px; }
+  .blue2 .rule3 { height: 2px; background: rgba(255,255,255,.35); margin: 28px 0 18px; }
+  .note { font-size: 23px; line-height: 1.6; color: #fff; opacity: .95; letter-spacing: -0.015em; }
+</style>
+</head>
+<body>
+<div class="poster">
+
+  <section class="top">
+    <img class="logo" src="../site/logo.png" alt="AI BUILDERS LAB">
+    <div class="rule"></div>
+    <span class="pill">[동탄] 이웃을 위한 무료 보험 점검</span>
+
+    <div class="hero">
+      <h1>
+        <span class="b">장보기는</span>
+        <span class="b">꼼꼼하게,</span>
+        <span class="n">보험료는</span>
+        <span class="n">자동이체만?</span>
+      </h1>
+      <div class="checkcard">
+        <svg width="104" height="104" viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="#1E5EFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+
+    <div class="bar"></div>
+    <p class="empathy">배달비 2천 원이 아까워 직접 포장하고, 1만 3천 원짜리 초밥이 먹고 싶어도 3천 원 아끼려고 1만 원짜리 백반을 고르는 <b>우리.</b></p>
+
+    <div class="tags">
+      <div class="tag">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z" stroke="#9AA3B6" stroke-width="2" stroke-linejoin="round"/><circle cx="7" cy="18" r="2" fill="#9AA3B6"/><circle cx="17" cy="18" r="2" fill="#9AA3B6"/></svg>
+        <s>배달비 2,000원</s>
+      </div>
+      <div class="tag">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="7" rx="3.5" fill="#E9EDF4" stroke="#9AA3B6" stroke-width="2"/><path d="M6 11c1-3 11-3 12 0" fill="#FFB8A3" stroke="#9AA3B6" stroke-width="2"/></svg>
+        <s>초밥 13,000원</s>
+      </div>
+      <div class="tag on">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M3 11h18a9 9 0 0 1-18 0z" fill="#fff" stroke="#1E5EFF" stroke-width="2" stroke-linejoin="round"/><path d="M8 8c0-2 2-2 2-4M13 8c0-2 2-2 2-4" stroke="#1E5EFF" stroke-width="2" stroke-linecap="round"/></svg>
+        백반 10,000원
+      </div>
+    </div>
+
+    <p class="question">그런데 매달 빠져나가는 보험료는<br><em>마지막으로 언제</em> 확인해 보셨나요?</p>
+  </section>
+
+  <section class="blue1">
+    <p class="lead">만약 내 보험에서 <span>매달 5만 원</span>을 줄일 수 있다면</p>
+    <div class="big">1,200<small>만 원</small></div>
+    <div class="formula">
+      <div class="fx"><span class="k">매달</span><span class="v">5만 원</span></div>
+      <span class="arrow">→</span>
+      <div class="fx"><span class="k">1년이면</span><span class="v">60만 원</span></div>
+      <span class="arrow">→</span>
+      <div class="fx last"><span class="k">같은 차이가 20년이면</span><span class="v">1,200만 원</span></div>
+    </div>
+    <p class="formula-note">1년이면 60만 원, 같은 차이가 20년간 이어지면 1,200만 원입니다.</p>
+    <div class="rule2"></div>
+    <p class="balance">물론 보험료가 싸다고 무조건 좋은 보험은 아닙니다.<br><b>필요한 보장은 챙기면서 불필요하게 내는 돈이 있는지</b> 살펴보는 게 먼저입니다.</p>
+  </section>
+
+  <section class="mid">
+    <p class="guide">동탄 이웃을 위한 무료 보험 점검,<br><em>‘동보다’</em>에서 함께 확인해 보세요.</p>
+    <div class="checks">
+      <div class="ck"><div class="ic"><svg width="38" height="38" viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="#1E5EFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>내 보험이 언제, 얼마나 보장하는지</p></div>
+      <div class="ck"><div class="ic"><svg width="38" height="38" viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="#1E5EFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>겹치거나 불필요한 보장은 없는지</p></div>
+      <div class="ck"><div class="ic"><svg width="38" height="38" viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="#1E5EFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>꼭 필요한데 빠진 보장은 없는지</p></div>
+      <div class="ck"><div class="ic"><svg width="38" height="38" viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="#1E5EFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>현재 보험을 유지하는 편이 나은지</p></div>
+    </div>
+
+    <div class="advisor">
+      <div class="avatar">장</div>
+      <div class="adv-body">
+        <p class="adv-intro">보험 상담을 진행하는 <b>장호주</b>입니다.<br>어려운 약관을 생활 속 말로 쉽게 설명해 드립니다.</p>
+        <div class="bubble"><b>“보험료가 적당한지 궁금해요.”</b> 이 한마디로 시작하셔도 됩니다. 모임에 들어오셔서 편하게 질문해 주세요 😊</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blue2">
+    <div class="qr-row">
+      <div class="qr-card"><img src="../site/qr.png" alt="동보다 모임 QR"></div>
+      <div class="qr-text">
+        <p class="s">카메라로 스캔하세요</p>
+        <p class="t">QR로<br><span>동보다 모임</span><br>들어가기</p>
+        <p class="brand">AI BUILDERS LAB</p>
+      </div>
+    </div>
+    <div class="rule3"></div>
+    <p class="note">※ 점검과 상담은 무료입니다. 절감 가능 여부와 금액은 가입 내용에 따라 다르며, 1,200만 원은 월 5만 원 차이가 20년간 유지되는 경우의 단순 계산 예시입니다.</p>
+  </section>
+
+</div>
+</body>
+</html>

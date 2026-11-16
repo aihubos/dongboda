@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>동보다 포스터 시안 B · 영수증형</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { margin: 0; width: 1080px; height: 3240px; overflow: hidden; background: #fff; }
+  body { font-family: 'Pretendard', sans-serif; color: #10224F; word-break: keep-all; -webkit-font-smoothing: antialiased; }
+  .poster { position: relative; width: 1080px; height: 3240px; overflow: hidden; background: #fff; display: flex; flex-direction: column; }
+  .pad { padding: 0 72px; }
+  .blue { color: #1E5EFF; }
+
+  /* header */
+  .header { padding-top: 44px; }
+  .header img { height: 68px; display: block; }
+  .rule { height: 3px; background: #E3E7EF; margin-top: 26px; border-radius: 2px; }
+
+  /* hero */
+  .hero { position: relative; margin-top: 24px; }
+  .pill { display: inline-flex; align-items: center; gap: 10px; background: #EAF0FF; color: #1E5EFF; font-weight: 700; font-size: 30px; padding: 14px 30px; border-radius: 999px; box-shadow: 0 2px 6px rgba(16,34,79,.12); }
+  .pill b { color: #10224F; }
+  .headline { margin-top: 18px; font-weight: 800; font-size: 90px; line-height: 1.14; letter-spacing: -0.03em; }
+  .headline .l1 { color: #1E5EFF; display: block; }
+  .headline .l2 { color: #10224F; display: block; }
+  .hero .check { position: absolute; right: 72px; top: 0; width: 120px; height: 120px; border-radius: 26px; background: #EAF0FF; box-shadow: 0 4px 10px rgba(16,34,79,.14); display: flex; align-items: center; justify-content: center; }
+
+  /* receipt */
+  .receipt-wrap { margin-top: 32px; padding: 28px 92px; background: #F2F5FB; position: relative; }
+  .receipt { position: relative; filter: drop-shadow(0 6px 10px rgba(16,34,79,.12)); }
+  .zig { height: 18px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='18'%3E%3Cpath d='M0 0H36L18 18Z' fill='%23fff'/%3E%3C/svg%3E") 0 0 / 36px 18px repeat-x; }
+  .zig.top { transform: rotate(180deg); }
+  .rbody { background: #fff; padding: 14px 52px 30px; }
+  .r-head { text-align: center; }
+  .r-head .store { font-weight: 800; font-size: 40px; letter-spacing: -0.02em; }
+  .r-head .meta { margin-top: 8px; font-size: 24px; color: #8A93A6; letter-spacing: 0.08em; font-weight: 500; }
+  .dash { border-top: 3px dashed #CDD3DE; margin: 14px 0; }
+  .row { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; padding: 8px 0; }
+  .row .name { font-size: 32px; font-weight: 700; line-height: 1.3; }
+  .row .name small { display: block; font-size: 26px; font-weight: 500; color: #6B7488; margin-top: 4px; }
+  .row .amt { font-size: 34px; font-weight: 800; white-space: nowrap; letter-spacing: -0.02em; text-align: right; line-height: 1.3; }
+  .row .amt small { display: block; font-size: 26px; font-weight: 600; color: #6B7488; }
+  .strike { text-decoration: line-through; color: #9AA3B5; font-weight: 600; }
+  .row.total .name, .row.total .amt { font-size: 34px; }
+  .autopay { margin: 6px -22px 0; background: #1E5EFF; border-radius: 20px; padding: 26px 30px; display: flex; justify-content: space-between; align-items: center; color: #fff; }
+  .autopay .name { font-size: 38px; font-weight: 800; letter-spacing: -0.02em; display: flex; align-items: center; gap: 14px; }
+  .autopay .name small { font-size: 24px; font-weight: 600; color: rgba(255,255,255,.8); display: block; }
+  .autopay .q { font-size: 60px; font-weight: 900; color: #D8FF6A; letter-spacing: 0.04em; }
+  .memo { margin-top: 18px; font-size: 30px; line-height: 1.5; color: #3D4A66; letter-spacing: -0.01em; }
+  .memo b { color: #10224F; }
+  .barcode { margin: 22px auto 0; width: 420px; height: 50px; background: repeating-linear-gradient(90deg, #10224F 0 3px, transparent 3px 6px, #10224F 6px 8px, transparent 8px 13px, #10224F 13px 17px, transparent 17px 20px); opacity: .85; }
+
+  /* question */
+  .question { margin-top: 38px; }
+  .bar { width: 64px; height: 8px; border-radius: 4px; background: #1E5EFF; }
+  .question h2 { margin-top: 18px; font-size: 50px; font-weight: 800; line-height: 1.3; letter-spacing: -0.03em; }
+
+  /* numbers */
+  .numbers { margin-top: 32px; }
+  .numbers .lead { font-size: 32px; font-weight: 600; color: #3D4A66; line-height: 1.45; }
+  .numbers .lead b { color: #1E5EFF; }
+  .timeline { margin-top: 18px; display: grid; grid-template-columns: 1fr 1fr 1.25fr; gap: 0; position: relative; }
+  .tl { position: relative; padding: 22px 22px 22px; border-radius: 24px; }
+  .tl .when { font-size: 28px; font-weight: 700; color: #6B7488; }
+  .tl .val { margin-top: 6px; font-size: 64px; font-weight: 900; letter-spacing: -0.04em; line-height: 1.05; white-space: nowrap; }
+  .tl .val span { font-size: 36px; font-weight: 800; letter-spacing: -0.02em; }
+  .tl.a, .tl.b { background: #EAF0FF; }
+  .tl.a { margin-right: 34px; }
+  .tl.b { margin-right: 34px; }
+  .tl.a .val, .tl.b .val { color: #1E5EFF; }
+  .tl.c { background: #1E5EFF; }
+  .tl.c .when { color: rgba(255,255,255,.85); }
+  .tl.c .val { color: #D8FF6A; font-size: 78px; }
+  .tl .arrow { position: absolute; right: -32px; top: 50%; transform: translateY(-50%); width: 30px; height: 30px; z-index: 2; }
+  .numbers .sum { margin-top: 14px; font-size: 30px; color: #3D4A66; line-height: 1.5; }
+  .numbers .sum b { color: #10224F; }
+
+  /* balance */
+  .balance { margin-top: 24px; background: #F5F7FB; border-radius: 22px; padding: 22px 32px; font-size: 30px; line-height: 1.5; color: #3D4A66; border-left: 8px solid #1E5EFF; }
+  .balance b { color: #10224F; }
+
+  /* checklist */
+  .guide { margin-top: 36px; }
+  .guide h3 { font-size: 42px; font-weight: 800; line-height: 1.32; letter-spacing: -0.03em; }
+  .checks { margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .ck { display: flex; align-items: center; gap: 20px; border: 2px solid #E3E7EF; border-radius: 22px; padding: 18px 22px; background: #fff; }
+  .ck .box { flex: 0 0 64px; height: 64px; border-radius: 16px; background: #EAF0FF; display: flex; align-items: center; justify-content: center; }
+  .ck p { font-size: 30px; font-weight: 700; line-height: 1.35; letter-spacing: -0.02em; }
+
+  /* counselor */
+  .counsel { margin-top: 32px; display: flex; gap: 24px; align-items: flex-start; }
+  .avatar { flex: 0 0 104px; height: 104px; border-radius: 50%; background: #1E5EFF; color: #fff; font-size: 46px; font-weight: 800; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 6px #EAF0FF; }
+  .c-text { flex: 1; }
+  .c-text .intro { font-size: 30px; line-height: 1.5; color: #3D4A66; }
+  .c-text .intro b { color: #10224F; font-size: 32px; }
+  .bubble { position: relative; margin-top: 12px; background: #EAF0FF; border-radius: 6px 26px 26px 26px; padding: 20px 28px; font-size: 30px; line-height: 1.5; color: #10224F; }
+  .bubble b { color: #1E5EFF; }
+
+  .counsel { padding-bottom: 36px; }
+  /* bottom */
+  .bottom { margin-top: auto; flex-shrink: 0; background: #1E5EFF; color: #fff; padding: 46px 72px 44px; }
+  .b-main { display: flex; align-items: center; gap: 44px; }
+  .qr-card { flex: 0 0 auto; background: #fff; border-radius: 28px; padding: 20px; box-shadow: 0 10px 24px rgba(8,30,100,.25); }
+  .qr-card img { width: 300px; height: 300px; display: block; }
+  .b-text .k { font-size: 30px; font-weight: 700; color: rgba(255,255,255,.85); }
+  .b-text h4 { margin-top: 12px; font-size: 56px; font-weight: 800; line-height: 1.22; letter-spacing: -0.03em; }
+  .b-text h4 em { font-style: normal; color: #D8FF6A; }
+  .b-text .scan { margin-top: 22px; display: inline-flex; align-items: center; gap: 10px; background: rgba(255,255,255,.16); border-radius: 999px; padding: 12px 24px; font-size: 28px; font-weight: 700; }
+  .b-rule { height: 2px; background: rgba(255,255,255,.35); margin: 30px 0 22px; }
+  .b-foot { display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; }
+  .brand { flex: 0 0 auto; }
+  .brand .n { font-size: 30px; font-weight: 800; letter-spacing: 0.01em; }
+  .brand .s { font-size: 22px; font-weight: 500; color: rgba(255,255,255,.75); margin-top: 4px; letter-spacing: 0.06em; }
+  .notice { font-size: 23px; line-height: 1.5; color: #fff; font-weight: 500; }
+</style>
+</head>
+<body>
+<div class="poster">
+
+  <!-- header -->
+  <div class="header pad">
+    <img src="../site/logo.png" alt="AI BUILDERS LAB">
+    <div class="rule"></div>
+  </div>
+
+  <!-- hero -->
+  <div class="hero pad">
+    <span class="pill"><b>[동탄]</b> 이웃을 위한 무료 보험 점검</span>
+    <h1 class="headline">
+      <span class="l1">장보기는 꼼꼼하게,</span>
+      <span class="l2">보험료는 자동이체만?</span>
+    </h1>
+  </div>
+
+  <!-- receipt -->
+  <div class="receipt-wrap">
+    <div class="receipt">
+      <div class="zig top"></div>
+      <div class="rbody">
+        <div class="r-head">
+          <div class="store">🛒 우리집 생활 영수증</div>
+          <div class="meta">이번 달 지출 기록</div>
+        </div>
+        <div class="dash"></div>
+
+        <div class="row">
+          <div class="name">배달비<small>직접 포장해서 받아옴</small></div>
+          <div class="amt blue">2,000원 절약</div>
+        </div>
+        <div class="row">
+          <div class="name">초밥 → 백반<small>먹고 싶었지만… 3천 원 아끼기</small></div>
+          <div class="amt"><span class="strike">13,000원</span> → 10,000원<small class="blue" style="color:#1E5EFF">-3,000원</small></div>
+        </div>
+
+        <div class="dash"></div>
+
+        <div class="autopay">
+          <div class="name">
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="3" stroke="#fff" stroke-width="2"/><path d="M3 10h18" stroke="#fff" stroke-width="2"/><path d="M7 15h4" stroke="#D8FF6A" stroke-width="2" stroke-linecap="round"/></svg>
+            <div>보험료 자동이체<small>매달 그냥 빠져나가는 중</small></div>
+          </div>
+          <div class="q">???</div>
+        </div>
+
+        <p class="memo">배달비 <b>2천 원</b>이 아까워 직접 포장하고, <b>1만 3천 원</b>짜리 초밥이 먹고 싶어도 <b>3천 원</b> 아끼려고 <b>1만 원</b>짜리 백반을 고르는 우리.</p>
+      </div>
+      <div class="zig"></div>
+    </div>
+  </div>
+
+  <!-- question -->
+  <div class="question pad">
+    <div class="bar"></div>
+    <h2>그런데 매달 빠져나가는 보험료는<br><span class="blue">마지막으로 언제 확인해 보셨나요?</span></h2>
+  </div>
+
+  <!-- numbers -->
+  <div class="numbers pad">
+    <p class="lead">만약 내 보험에서 <b>매달 5만 원</b>을 줄일 수 있다면,</p>
+    <div class="timeline">
+      <div class="tl a">
+        <div class="when">매달</div>
+        <div class="val">5<span>만 원</span></div>
+        <svg class="arrow" viewBox="0 0 24 24" fill="none"><path d="M8 4l8 8-8 8" stroke="#1E5EFF" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="tl b">
+        <div class="when">1년이면</div>
+        <div class="val">60<span>만 원</span></div>
+        <svg class="arrow" viewBox="0 0 24 24" fill="none"><path d="M8 4l8 8-8 8" stroke="#1E5EFF" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="tl c">
+        <div class="when">20년이면</div>
+        <div class="val">1,200<span>만 원</span></div>
+      </div>
+    </div>
+    <p class="sum">1년이면 60만 원, 같은 차이가 20년간 이어지면 <b>1,200만 원</b>입니다.</p>
+  </div>
+
+  <!-- balance -->
+  <div class="pad">
+    <div class="balance">물론 <b>보험료가 싸다고 무조건 좋은 보험은 아닙니다.</b> 필요한 보장은 챙기면서 불필요하게 내는 돈이 있는지 살펴보는 게 먼저입니다.</div>
+  </div>
+
+  <!-- checklist -->
+  <div class="guide pad">
+    <h3>동탄 이웃을 위한 무료 보험 점검,<br><span class="blue">‘동보다’</span>에서 함께 확인해 보세요.</h3>
+    <div class="checks">
+      <div class="ck"><div class="box"><svg width="38" height="38" viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="#1E5EFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>내 보험이 언제, 얼마나 보장하는지</p></div>
+      <div class="ck"><div class="box"><svg width="38" height="38" viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="#1E5EFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>겹치거나 불필요한 보장은 없는지</p></div>
+      <div class="ck"><div class="box"><svg width="38" height="38" viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="#1E5EFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>꼭 필요한데 빠진 보장은 없는지</p></div>
+      <div class="ck"><div class="box"><svg width="38" height="38" viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="#1E5EFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>현재 보험을 유지하는 편이 나은지</p></div>
+    </div>
+  </div>
+
+  <!-- counselor -->
+  <div class="counsel pad">
+    <div class="avatar">장</div>
+    <div class="c-text">
+      <p class="intro"><b>보험 상담을 진행하는 장호주입니다.</b><br>어려운 약관을 생활 속 말로 쉽게 설명해 드립니다.</p>
+      <div class="bubble"><b>“보험료가 적당한지 궁금해요.”</b> 이 한마디로 시작하셔도 됩니다. 모임에 들어오셔서 편하게 질문해 주세요 😊</div>
+    </div>
+  </div>
+
+  <!-- bottom blue block -->
+  <div class="bottom">
+    <div class="b-main">
+      <div class="qr-card"><img src="../site/qr.png" alt="동보다 모임 QR"></div>
+      <div class="b-text">
+        <div class="k">AI BUILDERS LAB</div>
+        <h4>QR로 <em>동보다</em><br>모임 들어가기</h4>
+        <div class="scan">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M4 8V5a1 1 0 011-1h3M16 4h3a1 1 0 011 1v3M20 16v3a1 1 0 01-1 1h-3M8 20H5a1 1 0 01-1-1v-3" stroke="#D8FF6A" stroke-width="2.4" stroke-linecap="round"/><path d="M4 12h16" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>
+          카메라로 스캔하세요
+        </div>
+      </div>
+    </div>
+    <div class="b-rule"></div>
+    <div class="b-foot">
+      <p class="notice">※ 점검과 상담은 무료입니다. 절감 가능 여부와 금액은 가입 내용에 따라 다르며, 1,200만 원은 월 5만 원 차이가 20년간 유지되는 경우의 단순 계산 예시입니다.</p>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
