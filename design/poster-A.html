@@ -18,27 +18,52 @@
   .lime { color: #D8FF6A; }
 
   /* header */
-  .header { padding-top: 56px; }
+  .header { padding-top: 24px; }
+  .header-row {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 28px;
+  }
+  .header-left { display: flex; flex-direction: column; align-items: flex-start; gap: 22px; min-width: 0; }
   .logo { height: 72px; display: block; }
-  .rule { height: 3px; background: #E3E6EC; margin-top: 32px; border-radius: 2px; }
+  .top-qr { flex: none; width: 280px; text-align: center; }
+  .top-qr-card {
+    background: #fff; padding: 16px; border-radius: 24px;
+    box-shadow: 0 0 0 2px #E8ECF4, 0 6px 16px rgba(16,34,79,.08);
+  }
+  .top-qr-card img { width: 248px; height: 248px; display: block; }
+  .top-qr-cap {
+    margin-top: 10px; font-size: 26px; font-weight: 800;
+    color: #1E5EFF; letter-spacing: -0.03em; line-height: 1.2;
+  }
+  .rule { height: 3px; background: #E3E6EC; margin-top: 22px; border-radius: 2px; }
 
   /* hero */
   .badge {
     display: inline-flex; align-items: center; gap: 10px;
-    margin-top: 36px; padding: 14px 30px; border-radius: 999px;
+    padding: 14px 30px; border-radius: 999px;
     background: #EAF0FF; color: #1E5EFF; font-size: 32px; font-weight: 700;
     box-shadow: 0 3px 8px rgba(16,34,79,.10);
   }
   .badge b { font-weight: 800; }
   .headline {
-    margin-top: 30px; font-size: 76px; font-weight: 800; line-height: 1.18;
+    margin-top: 22px; font-size: 76px; font-weight: 800; line-height: 1.22;
     letter-spacing: -0.04em; white-space: nowrap;
   }
   .nowrap { white-space: nowrap; }
+  .mark {
+    position: relative; z-index: 0; isolation: isolate;
+    color: #10224F; white-space: nowrap; padding: 0 0.08em;
+  }
+  .mark::before {
+    content: ""; position: absolute; z-index: -1;
+    left: -0.05em; right: -0.05em; top: 0.18em; bottom: 0.05em;
+    background: #D8FF6A; border-radius: 8px;
+    box-shadow: 0 0 18px rgba(216,255,106,.7);
+  }
   .bar { width: 64px; height: 8px; border-radius: 4px; background: #1E5EFF; }
 
   /* empathy */
-  .empathy { display: flex; gap: 40px; align-items: center; margin-top: 28px; }
+  .empathy { display: flex; gap: 40px; align-items: center; margin-top: 24px; }
   .empathy p { flex: 1; font-size: 32px; line-height: 1.6; color: #3A4766; letter-spacing: -0.01em; }
   .empathy p strong { color: #10224F; font-weight: 700; }
   .receipt { flex: 0 0 190px; height: 242px; }
@@ -48,7 +73,7 @@
   }
 
   /* numbers staircase */
-  .numbers { margin-top: 40px; }
+  .numbers { margin-top: 32px; }
   .lead { font-size: 34px; line-height: 1.55; color: #3A4766; letter-spacing: -0.01em; }
   .lead strong { color: #1E5EFF; font-weight: 800; }
   .steps { margin-top: 30px; display: flex; flex-direction: column; align-items: flex-end; gap: 14px; }
@@ -145,15 +170,24 @@
 
   <!-- header -->
   <div class="wrap header">
-    <img class="logo" src="../site/logo.png" alt="AI BUILDERS LAB">
+    <div class="header-row">
+      <div class="header-left">
+        <img class="logo" src="../site/logo.png" alt="AI BUILDERS LAB">
+        <div class="badge"><b>[동탄]</b> 이웃을 위한 무료 보험 점검</div>
+      </div>
+      <div class="top-qr">
+        <div class="top-qr-card">
+          <img src="../site/daangn-qr.png" width="248" height="248" alt="당근모임 바로가기 QR">
+        </div>
+        <p class="top-qr-cap">당근모임 바로가기</p>
+      </div>
+    </div>
     <div class="rule"></div>
+    <h1 class="headline">배달비 <span class="mark nowrap">3,000원</span>은 아까우면서,<br><span class="blue">매달 나가는 <span class="mark">보험료</span>는 그대로?</span></h1>
   </div>
 
-  <!-- hero -->
+  <!-- hero body -->
   <div class="wrap">
-    <div class="badge"><b>[동탄]</b> 이웃을 위한 무료 보험 점검</div>
-    <h1 class="headline">배달비 <span class="nowrap">3,000원</span>은 아까우면서,<br><span class="blue">매달 나가는 보험료는 그대로?</span></h1>
-
     <div class="empathy">
       <p>배달비 <strong>2천 원</strong>이 아까워 직접 포장하고, <strong>1만 3천 원</strong>짜리 초밥이 먹고 싶어도 <strong>3천 원</strong> 아끼려고 <strong>1만 원</strong>짜리 백반을 고르는 우리.</p>
       <!-- receipt illustration -->
