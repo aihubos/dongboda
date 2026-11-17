@@ -17,36 +17,28 @@
   .blue { color: #1E5EFF; }
   .lime { color: #D8FF6A; }
 
-  /* header */
-  .header { padding-top: 24px; }
+  /* header — match aiedu final C-v logo/rule/QR row */
+  .header { padding-top: 64px; }
   .header-row {
     display: flex; align-items: center; justify-content: space-between;
-    gap: 28px;
+    gap: 40px;
   }
-  .header-left { display: flex; flex-direction: column; align-items: flex-start; gap: 22px; min-width: 0; }
-  .logo { height: 72px; display: block; }
+  .logo { display: block; width: 400px; height: auto; margin-left: -6px; }
   .top-qr { flex: none; width: 280px; text-align: center; }
   .top-qr-card {
-    background: #fff; padding: 16px; border-radius: 24px;
-    box-shadow: 0 0 0 2px #E8ECF4, 0 6px 16px rgba(16,34,79,.08);
+    background: #fff; padding: 16px; border-radius: 28px;
+    border: 2px solid #E4E9F2; box-shadow: 0 14px 34px rgba(16,34,79,.08);
   }
   .top-qr-card img { width: 248px; height: 248px; display: block; }
   .top-qr-cap {
-    margin-top: 10px; font-size: 26px; font-weight: 800;
+    margin-top: 12px; font-size: 26px; font-weight: 800;
     color: #1E5EFF; letter-spacing: -0.03em; line-height: 1.2;
   }
-  .rule { height: 3px; background: #E3E6EC; margin-top: 22px; border-radius: 2px; }
+  .rule { height: 2px; background: #D9DEE8; margin: 36px 0 0; }
 
   /* hero */
-  .badge {
-    display: inline-flex; align-items: center; gap: 10px;
-    padding: 14px 30px; border-radius: 999px;
-    background: #EAF0FF; color: #1E5EFF; font-size: 32px; font-weight: 700;
-    box-shadow: 0 3px 8px rgba(16,34,79,.10);
-  }
-  .badge b { font-weight: 800; }
   .headline {
-    margin-top: 22px; font-size: 76px; font-weight: 800; line-height: 1.22;
+    margin-top: 32px; font-size: 76px; font-weight: 800; line-height: 1.22;
     letter-spacing: -0.04em; white-space: nowrap;
   }
   .nowrap { white-space: nowrap; }
@@ -63,17 +55,17 @@
   .bar { width: 64px; height: 8px; border-radius: 4px; background: #1E5EFF; }
 
   /* empathy */
-  .empathy { display: flex; gap: 40px; align-items: center; margin-top: 24px; }
+  .empathy { display: flex; gap: 40px; align-items: center; margin-top: 16px; }
   .empathy p { flex: 1; font-size: 32px; line-height: 1.6; color: #3A4766; letter-spacing: -0.01em; }
   .empathy p strong { color: #10224F; font-weight: 700; }
   .receipt { flex: 0 0 190px; height: 242px; }
   .question {
-    margin-top: 22px; font-size: 42px; font-weight: 800; line-height: 1.35;
+    margin-top: 16px; font-size: 42px; font-weight: 800; line-height: 1.35;
     letter-spacing: -0.03em;
   }
 
   /* numbers staircase */
-  .numbers { margin-top: 32px; }
+  .numbers { margin-top: 20px; }
   .lead { font-size: 34px; line-height: 1.55; color: #3A4766; letter-spacing: -0.01em; }
   .lead strong { color: #1E5EFF; font-weight: 800; }
   .steps { margin-top: 30px; display: flex; flex-direction: column; align-items: flex-end; gap: 14px; }
@@ -104,16 +96,16 @@
   }
 
   /* balance */
-  .balance { margin-top: 34px; display: flex; gap: 24px; }
+  .balance { margin-top: 24px; display: flex; gap: 24px; }
   .balance .bar { flex: 0 0 8px; width: 8px; height: auto; }
   .balance p { font-size: 32px; line-height: 1.6; color: #3A4766; }
   .balance p strong { color: #10224F; font-weight: 700; }
 
-  .divider { height: 2px; background: #E3E6EC; margin-top: 34px; }
+  .divider { height: 2px; background: #E3E6EC; margin-top: 22px; }
 
   /* guide + checklist */
-  .guide { margin-top: 34px; font-size: 46px; font-weight: 800; line-height: 1.3; letter-spacing: -0.03em; }
-  .checks { margin-top: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .guide { margin-top: 24px; font-size: 46px; font-weight: 800; line-height: 1.3; letter-spacing: -0.03em; }
+  .checks { margin-top: 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .check {
     display: flex; align-items: center; gap: 20px; padding: 20px 24px;
     border: 2px solid #E8ECF4; border-radius: 24px; background: #FAFBFF;
@@ -126,7 +118,7 @@
   .check span { font-size: 30px; font-weight: 600; line-height: 1.38; letter-spacing: -0.02em; }
 
   /* consultant */
-  .consult { margin-top: 30px; display: flex; gap: 28px; align-items: flex-start; }
+  .consult { margin-top: 20px; display: flex; gap: 28px; align-items: flex-start; }
   .avatar {
     flex: 0 0 112px; height: 112px; border-radius: 50%; background: #1E5EFF; color: #fff;
     font-size: 52px; font-weight: 800; display: flex; align-items: center; justify-content: center;
@@ -171,10 +163,7 @@
   <!-- header -->
   <div class="wrap header">
     <div class="header-row">
-      <div class="header-left">
-        <img class="logo" src="../site/logo.png" alt="AI BUILDERS LAB">
-        <div class="badge"><b>[동탄]</b> 이웃을 위한 무료 보험 점검</div>
-      </div>
+      <img class="logo" src="../site/logo.png" alt="AI BUILDERS LAB">
       <div class="top-qr">
         <div class="top-qr-card">
           <img src="../site/daangn-qr.png" width="248" height="248" alt="당근모임 바로가기 QR">
