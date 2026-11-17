@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>동보다 포스터 시안 A · 숫자 계단형</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { margin: 0; overflow: hidden; background: #fff; }
@@ -32,8 +33,11 @@
   .top-qr-card img { width: 248px; height: 248px; display: block; }
   .top-qr-cap {
     margin-top: 12px; font-size: 26px; font-weight: 800;
-    color: #1E5EFF; letter-spacing: -0.03em; line-height: 1.2;
+    letter-spacing: -0.03em; color: #10224F;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    -webkit-font-smoothing: auto;
   }
+  .top-qr-cap .dlogo { height: 32px; width: auto; display: block; }
   .rule { height: 2px; background: #D9DEE8; margin: 36px 0 0; }
 
   /* hero */
@@ -163,12 +167,12 @@
   <!-- header -->
   <div class="wrap header">
     <div class="header-row">
-      <img class="logo" src="../site/logo.png" alt="AI BUILDERS LAB">
+      <img class="logo" src="../logo.png" alt="AI BUILDERS LAB">
       <div class="top-qr">
         <div class="top-qr-card">
-          <img src="../site/daangn-qr.png" width="248" height="248" alt="당근모임 바로가기 QR">
+          <img src="../aibuilders-daangn-qr.png" width="248" height="248" alt="당근모임 바로가기 QR">
         </div>
-        <p class="top-qr-cap">당근모임 바로가기</p>
+        <p class="top-qr-cap"><img class="dlogo" src="../daangn-logo.svg" alt="당근">모임 바로가기</p>
       </div>
     </div>
     <div class="rule"></div>
@@ -245,7 +249,7 @@
   <!-- bottom blue block -->
   <div class="bottom">
     <div class="cta">
-      <div class="qr-card"><img src="../site/daangn-qr.png" alt="당근모임 바로가기 QR"></div>
+      <div class="qr-card"><img src="../daangn-qr.png" alt="당근모임 바로가기 QR"></div>
       <div class="cta-text">
         <p class="k">동탄 이웃을 위한 무료 보험 점검</p>
         <p class="t">QR로 <span class="lime">동보다 모임</span>들어가기</p>
